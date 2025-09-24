@@ -115,14 +115,20 @@ min_date = df['fecha'].min()
 max_date = df['fecha'].max()
 
 app.layout = html.Div([
+
+    # Encabezado
     html.Div([
         html.H1(PAGE_TITLE, style={'marginBottom': 5}),
-        html.P("Dashboard interactivo: relación nivel embalse Chingaza ↔ consumo en Suba. "
-               "Filtra por rango de fechas, elige modelo y explora predicciones.", style={'marginTop': 0}),
+        html.P(
+            "Dashboard interactivo: relación nivel embalse Chingaza ↔ consumo en Suba. "
+            "Filtra por rango de fechas, elige modelo y explora predicciones.",
+            style={'marginTop': 0}
+        ),
     ], style={'padding': '10px 25px'}),
 
-    # Controls
+    # Controles
     html.Div([
+
         html.Div([
             html.Label("Rango de fechas:"),
             dcc.DatePickerRange(
@@ -131,39 +137,42 @@ app.layout = html.Div([
                 end_date=max_date,
                 display_format='YYYY-MM-DD'
             )
-        ], style={'display':'inline-block','marginRight':'20px'}),
+        ], style={'display': 'inline-block', 'marginRight': '20px'}),
 
         html.Div([
             html.Label("Modelo:"),
             dcc.Dropdown(
                 id='model-select',
-                options=[{'label':k,'value':k} for k in models.keys()],
+                options=[{'label': k, 'value': k} for k in models.keys()],
                 value='RandomForest',
                 clearable=False,
-                style={'width':'220px'}
+                style={'width': '220px'}
             )
-        ], style={'display':'inline-block','marginRight':'20px'}),
+        ], style={'display': 'inline-block', 'marginRight': '20px'}),
 
         html.Div([
             html.Label("Mostrar:"),
             dcc.Checklist(
                 id='show-checks',
                 options=[
-                    {'label':'Datos reales','value':'real'},
-                    {'label':'Predicción (test)','value':'pred'},
-                    {'label':'Media móvil consumo (3m)','value':'roll3'}
+                    {'label': 'Datos reales', 'value': 'real'},
+                    {'label': 'Predicción (test)', 'value': 'pred'},
+                    {'label': 'Media móvil consumo (3m)', 'value': 'roll3'}
                 ],
-                value=['real','pred']
+                value=['real', 'pred']
             )
-        ], style={'display':'inline-block','verticalAlign':'top'})
-    ], style={'padding':'10px 25px','borderBottom':'1px solid #ddd'}),
+        ], style={'display': 'inline-block', 'verticalAlign': 'top'})
 
-    # Top metrics and narrative
+    ], style={'padding': '10px 25px', 'borderBottom': '1px solid #ddd'}),
+
+    # Métricas y conclusiones
     html.Div([
+
         html.Div([
             html.H3("Métricas (conjunto test)"),
-            html.Div(id='metrics-cards', style={'display':'flex','gap':'12px'})
-        ], style={'width':'48%','display':'inline-block','verticalAlign':'top'}),
+            html.Div(id='metrics-cards', style={'display': 'flex', 'gap': '12px'})
+        ], style={'width': '48%', 'display': 'inline-block', 'verticalAlign': 'top'}),
+
         html.Div([
             html.H3("Conclusiones clave"),
             html.Div([
@@ -173,10 +182,12 @@ app.layout = html.Div([
                     • Modelos no lineales (Random Forest, Gradient Boosting) capturan mejor patrones y reducen errores.
                     • Para decisiones operativas, recomendamos usar el modelo de ensamble ajustado y continuar enriqueciendo datos con variables climáticas y registros de campañas.
                 """))
-            ], style={'fontSize':'14px','lineHeight':'1.5'})
-        ], style={'width':'48%','display':'inline-block','verticalAlign':'top','paddingLeft':'20px'})
-    ], style={'padding':'10px 25px'}),
+            ], style={'fontSize': '14px', 'lineHeight': '1.5'})
+        ], style={'width': '48%', 'display': 'inline-block', 'verticalAlign': 'top', 'paddingLeft': '20px'})
 
+    ], style={'padding': '10px 25px'})
+
+])
     # Graphs
     html.Div([
         dcc.Graph(id='ts-graph', style={'height':'420px'}),

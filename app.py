@@ -107,7 +107,7 @@ metrics_summary = {name: calc_metrics(y_test, preds[name]) for name in preds}
 feat_imp = pd.DataFrame({'feature': FEATURES, 'importance': rf.feature_importances_}).sort_values('importance', ascending=False)
 
 # --- Dash app ---
-app = Dash(__name__, title=PAGE_TITLE)
+app = dash.Dash(__name__)
 server = app.server
 
 # Layout
@@ -304,4 +304,5 @@ def update_all(start_date, end_date, model_name, show_checks):
 # run server (for local)
 
 if __name__ == "__main__":
-    app.run_server(host="0.0.0.0", port=8050, debug=False)
+    port = int(os.environ.get("PORT", 8050))  # Render asigna el puerto
+    app.run_server(host="0.0.0.0", port=port, debug=False)

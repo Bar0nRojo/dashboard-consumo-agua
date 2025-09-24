@@ -8,3 +8,4 @@ jupyter-server-proxy
 notebook
 pandas
 dash[jupyter]
+dash==2.18.2

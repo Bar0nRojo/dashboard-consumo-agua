@@ -304,17 +304,4 @@ def update_all(start_date, end_date, model_name, show_checks):
 # run server (for local)
 
 if __name__ == "__main__":
-    import socket
-
-    puertos = [8050, 8051, 8052, 8060, 8888]
-    for port in puertos:
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.bind(("0.0.0.0", port))
-            sock.close()
-
-            print(f"✅ Iniciando dashboard en el puerto {port}...")
-            app.run(host="0.0.0.0", port=port, debug=False)
-            break
-        except OSError:
-            print(f"⚠️ Puerto {port} en uso, probando el siguiente...")
+    app.run_server(host="0.0.0.0", port=8050, debug=False)

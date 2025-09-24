@@ -4,3 +4,5 @@ scikit-learn
 plotly
 dash
 gunicorn
+jupyter-server-proxy
+notebook

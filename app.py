@@ -304,4 +304,4 @@ def update_all(start_date, end_date, model_name, show_checks):
 # run server (for local)
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8050))
-    app.run_server(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=False)

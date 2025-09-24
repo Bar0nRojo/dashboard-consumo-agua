@@ -303,15 +303,12 @@ def update_all(start_date, end_date, model_name, show_checks):
 
 # run server (for local)
 
-import socket
-
 if __name__ == "__main__":
-    # Lista de puertos posibles (puedes agregar más si quieres)
-    puertos = [8050, 8051, 8052, 8060, 8888]
+    import socket
 
+    puertos = [8050, 8051, 8052, 8060, 8888]
     for port in puertos:
         try:
-            # Verifica si el puerto está libre
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.bind(("0.0.0.0", port))
             sock.close()

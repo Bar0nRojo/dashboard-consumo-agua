@@ -7,3 +7,4 @@ gunicorn
 jupyter-server-proxy
 notebook
 pandas
+dash[jupyter]

@@ -302,6 +302,7 @@ def update_all(start_date, end_date, model_name, show_checks):
     return ts_fig, scatter_fig, feat_fig, cards, table_data
 
 # run server (for local)
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8050))
-    app.run(host='0.0.0.0', port=port, debug=False)
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 8050))
+    app.run_server(host="0.0.0.0", port=port)
